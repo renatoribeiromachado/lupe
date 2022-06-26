@@ -18,8 +18,8 @@ class Blog extends BaseController
         return view('pages/blog',[
             'title'       => 'Blog Lupe Cloud',
             'description' => 'A SUA PLATAFORMA DE MONITORAMENTO DE ATIVOS E SEGURANÇA',
-            'blogs'       => $this->blogModel->getBlogUser('created_at', 'desc')->paginate(1),                         
-            'pager'       => $this->blogModel->pager,
+            'blogs'       => $this->blogModel->getBlogUser('created_at', 'desc')->paginate(20),                         
+            'pager'       => $this->blogModel->pager
         ]);
     }
     
@@ -39,7 +39,8 @@ class Blog extends BaseController
         return view('pages/blog',[
             'title'       => 'Blog Lupe Cloud',
             'description' => 'A SUA PLATAFORMA DE MONITORAMENTO DE ATIVOS E SEGURANÇA',
-            'blogs'       => $this->blogModel->getBlogSearch($search)->findAll()
+            'blogs'       => $this->blogModel->getBlogSearch($search)->paginate(20),
+            'pager'       => $this->blogModel->pager,
         ]);
     }
 }
