@@ -16,7 +16,7 @@ class Home extends BaseController
         $this->userModel    = new UserModel();    
         $this->contactModel = new ContactModel(); 
     }
-    
+     
     public function index()
     {
         $data = [
