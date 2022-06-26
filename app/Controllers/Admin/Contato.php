@@ -24,8 +24,8 @@ class Contato extends BaseController
         
         echo view('admin/pages/contato/contato',[
                     'msg'         => $this->session->getFlashdata('msg'),
-                    'title'       => 'Lista de leads',
-                    'description' => 'Visualização e Exclusão',
+                    'title'       => 'Lista de Contato(s)',
+                    'description' => 'Visualização e Exclusão da lista de contatos',
                     'contacts'    => $contacts,
                     'count'       => $this->contactModel->countAll(),
                     'pager'       => $this->contactModel->pager
@@ -66,7 +66,7 @@ class Contato extends BaseController
 
         $writer = new Xlsx($spreadsheet);
         $writer->save('world.xlsx');
-        return $this->response->download('world.xlsx', null)->setFileName('leads_acorp.xlsx');
+        return $this->response->download('world.xlsx', null)->setFileName('contatos.xlsx');
 
     }
 
