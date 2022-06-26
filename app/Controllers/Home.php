@@ -13,76 +13,116 @@ class Home extends BaseController
         $this->contactModel = new ContactModel();
     }
     
+    /** pagina Home**/
     public function index()
     {
         $data = [
-            'msg'   => $this->session->getFlashdata('msg'),
-            'title' => 'Lupe Cloud',
+            'msg'         => $this->session->getFlashdata('msg'),
+            'title'       => 'Lupe Cloud',
             'description' => 'A SUA PLATAFORMA DE MONITORAMENTO DE ATIVOS E SEGURANÇA'
         ];
         
         return view('pages/home', $data);
     }
     
+    /** pagina Office**/
     public function office()
     {
         $data = [
-            'msg'   => $this->session->getFlashdata('msg'),
-            'title' => 'Lupe offfice 365',
+            'msg'         => $this->session->getFlashdata('msg'),
+            'title'       => 'Lupe offfice 365',
             'description' => ''
         ];
         
         return view('pages/office', $data);
     }
     
+    /** pagina Azure**/
     public function azure()
     {
         $data = [
-            'msg'   => $this->session->getFlashdata('msg'),
-            'title' => 'Lupe Azure',
+            'msg'         => $this->session->getFlashdata('msg'),
+            'title'       => 'Lupe Azure',
             'description' => ''
         ];
         
         return view('pages/azure', $data);
     }
     
+    /** pagina AWS**/
     public function aws()
     {
         $data = [
-            'msg'   => $this->session->getFlashdata('msg'),
-            'title' => 'Lupe Nuvem Aws',
+            'msg'         => $this->session->getFlashdata('msg'),
+            'title'       => 'Lupe Nuvem Aws',
             'description' => ''
         ];
         
         return view('pages/aws', $data);
     }
     
+    /** Salva BD**/
     public function store()
     {
-        
         if($this->request->getMethod() === 'post'){
         
             $data = [
-                'msg'       => $this->session->getFlashdata('msg'),
                 'url'       => $this->request->getPost('url'),
                 'name'      => $this->request->getPost('name'),
-                'last_name' => $this->request->getPost('last_name'),
+                'telephone' => $this->request->getPost('telephone'),
                 'email'     => $this->request->getPost('email'),
                 'company'   => $this->request->getPost('company'),
-                'whatsapp'  => $this->request->getPost('whatsapp'),
+                'adress'    => $this->request->getPost('adress'),
                 'message'   => $this->request->getPost('message')
             ];
-            
-           //dd($data);
-            
+
             if($this->contactModel->save($data)){ 
-                $this->session->setFlashdata('msg',"<div class='alert alert-success'> Mensagem enviada com sucesso</div>");
-                return redirect()->to(base_url('obrigado'));
+                /**Se conseguiu salvar envia os dados por email tb**/
+                $this->sendEmail();
+                $this->session->setFlashdata('msg',"<div class='alert alert-success'> :) Mensagem enviada com sucesso!</div>");
+                return redirect()->to(base_url('/#lead'));
             }else{
                 return redirect()->to(base_url('/#lead'))
                      ->with('errors_validation_model',$this->contactModel->errors())->withInput();
             }
          
+        }else{
+            return redirect()->to(base_url('/'));
+        }
+    }
+    
+    /** Enviar email**/
+    public function sendEmail()
+    {
+        if ($this->request->getMethod() === 'post')
+        {
+            
+            $subject   = "Mensagem via Site";
+            $name      = $this->request->getVar('name');
+            $emailFrom = $this->request->getVar('email');
+            $company   = $this->request->getVar('company');
+            $telephone = $this->request->getVar('telephone');
+            $message   = $this->request->getVar('message');
+            $adress    = $this->request->getVar('adress');
+
+            $email = \Config\Services::email();
+            $email->setFrom($emailFrom, $name);
+            $email->setTo('renato@markp.com.br');
+            //$email->setCC('renato@acessohost.com.br');
+            //$email->setBCC('them@their-example.com');
+
+            $email->setSubject($subject);
+            $email->setMessage(
+                        "Assunto:    " . $subject . 
+                        "\nNome:     " . $name . 
+                        "\nE-mail:   " . $emailFrom . 
+                        "\nTelefone: " . $telephone . 
+                        "\nMensagem: " . $message .
+                        "\nEndereço: " . $adress 
+                    );
+
+            $email->send();
+
         }else{
             return redirect()->to(base_url('/'));
         }

@@ -219,9 +219,8 @@
                             <p class="">Nos contacte para esclarecer suas dúvidas, solicitar suporte ou enviar sugestões para que possamos oferecer o serviço necessário.</p>
 
                             <form action="<?php echo base_url(); ?>/home/store" method="post">
+                                
                                 <input type="hidden" value="Lupe" name="url">
-
-
 
                                 <div class="row mb-3">
                                     <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
@@ -269,24 +268,18 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
-                                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                                    <input type="text" id="disabledTextInput" class="form-control" name="telephone2" value="<?= old('telephone2'); ?>" placeholder="Telefone">
-                                </div>
-                            </div>
-
                             <button type="submit" class="btn btn-primary"> Enviar Mensagem</button>
-                            <?= csrf_field(); ?>
-
-
+                          
                             <div class="row mt-3 mb-3">
                                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
                                     <p><a href="https://wa.me/55 ----- ?text=Oi, gostaria de mais informa%C3%A7%C3%B5es." target="_blank"><img src="<?= base_url(); ?>/public/assets/img/whatsapp.png" class="img-fluid" alt="Lupe"/></a> <span class="info">e entre em contato via WhatsApp</span></p>
                                 </div>
                             </div>
 
-
+                            <?= csrf_field(); ?>
                             </form> 
+                            
+                            <?= $msg; ?>
 
                         </div>
 

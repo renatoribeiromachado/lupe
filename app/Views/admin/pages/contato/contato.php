@@ -24,12 +24,12 @@
                         </tr>
                         <tr>
                             <th class="text-center">Nome</th>
-                            <th class="text-center">Sobrenome</th>
-                            <th class="text-center">Whatsapp</th>
                             <th class="text-center">E-mail</th>
                             <th class="text-center">Empresa</th>
+                            <th class="text-center">Telefone</th>                          
                             <th class="text-center">Mensagem</th>
-                            <th class="text-center">Pagina</th>
+                            <th class="text-center">Endereço</th>
+                            <th class="text-center">Url</th>
                             <th class="text-center">Data</th>
                             <th class="text-center"><i class="fa fa-remove"></i></th>
                         </tr>
@@ -47,11 +47,11 @@
                                     extract($contact);
                             ?>
                             <td><?= $name; ?></td>
-                            <td><?= $last_name; ?></td>
-                            <td><?= $whatsapp; ?></td>
                             <td><?= $email; ?></td>
                             <td><?= $company; ?></td>
+                            <td><?= $telephone; ?></td>
                             <td><?= $message; ?></td>
+                            <td><?= $adress; ?></td>
                             <td><?= $url; ?></td>
                             <td class="text-center"><?= date('d/m/Y', strtotime($created_at)); ?></td>
                             <td class="text-center"><?php echo anchor(base_url('admin/contato/delete/' . $id), 'Excluir', ['class' => 'btn btn-danger', 'onclick' => 'return confirm("Deseja realmente exluir?")']); ?></td>

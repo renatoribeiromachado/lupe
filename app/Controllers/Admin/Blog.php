@@ -64,7 +64,7 @@ class Blog extends BaseController
             ];
         
             if($this->blogModel->save($data)){
-               $this->session->setFlashdata('msg',"<div class='alert alert-success'> Cadastrado com sucesso</div>");
+                $this->session->setFlashdata('msg',"<div class='alert alert-success'> Cadastrado com sucesso</div>");
                 return redirect()->to(base_url('admin/blog'));
             }else{
                 echo "erro";

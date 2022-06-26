@@ -44,7 +44,7 @@
                         <tr>
                             <td><?= date('d/m/Y', strtotime($created_at)); ?></td>
                             <td><?= $name; ?></td>
-                            <td><?= $last_name; ?></td>
+                            <td><?= $company; ?></td>
                             <td><?= $email; ?></td>
                         </tr>
                         <?php } ?>

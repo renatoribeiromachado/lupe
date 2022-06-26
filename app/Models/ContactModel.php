@@ -7,7 +7,7 @@ class ContactModel extends Model
 {
     protected $table         = 'contacts';
     protected $primaryKey    = 'id';
-    protected $allowedFields = ['name','last_name','email','company','url','whatsapp','message'];
+    protected $allowedFields = ['url','name','email','company','telephone','message','adress'];
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -16,20 +16,17 @@ class ContactModel extends Model
     /*Validação*/
     protected $validationRules = [
         'name'      => 'required',
-        'last_name' => 'required',
-        'email'     => 'required|valid_email|is_unique[leads_acorp.email,id,{id}]',
+        'email'     => 'required|valid_email|is_unique[contacts.email,id,{id}]',
         'company'   => 'required',
-        'whatsapp'  => 'required'
-        
+        'telephone' => 'required',
+        'message'   => 'required',
+        'adress'    => 'required'   
     ];
     
     /*Mensagem da validação*/
     protected $validationMessages = [
         'name' => [
             'required'  => 'O campo Nome é obrigatório'
-        ],
-        'last_name' => [
-            'required'  => 'O campo Sobrenome é obrigatório'
         ],
         'email' => [
             'required'  => 'O campo E-mail é obrigatório',
@@ -38,8 +35,14 @@ class ContactModel extends Model
         'company' => [
             'required' => 'O campo Empresa é obrigatório',
         ],
-        'whatsapp' => [
-            'required' => 'O campo Whatsapp é obrigatório'
+        'telephone' => [
+            'required' => 'O campo Telefone é obrigatório'
+        ],
+        'adress' => [
+            'company'  => 'O campo Endereço é obrigatório'
+        ],
+        'message' => [
+            'company'  => 'O campo Mensagem é obrigatório'
         ],
     ];
 }

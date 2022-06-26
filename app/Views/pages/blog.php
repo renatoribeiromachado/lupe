@@ -11,11 +11,11 @@ echo $this->section('content');
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="<?= base_url(); ?>/public/assets/img/banner-blog.png" class="d-block img-fluid desktop" alt="Lupe" style="width:100%">
-                    <img src="<?= base_url(); ?>/public/assets/img/banner-blog-mobile.png" class="d-block img-fluid mobile" alt="Lupe" style="width:100%;">
+                    <img src="<?= base_url(); ?>/public/assets/img/banner-blog-mobile-1.png" class="d-block img-fluid mobile" alt="Lupe" style="width:100%;">
                 </div> 
             </div>  
         </div>       
-    </section> 
+    </section>  
 
     <!--section2-->
     <section id="section2">
@@ -50,7 +50,7 @@ echo $this->section('content');
                 
                 <?php
                     if(count($blogs) == 0){
-                        echo '<div class="alert alert-info"><h6 class="text-center"><i class="fa fa-exclamation"></i> Desculpa, nenhuma postagem localizada!</h6></div>';
+                        echo '<div class="alert alert-info mt-5"><h6 class="text-center"><i class="fa fa-exclamation"></i> Desculpa, nenhuma postagem localizada!</h6></div>';
                     }else{
                         foreach($blogs as $blog){ 
                             extract($blog);
